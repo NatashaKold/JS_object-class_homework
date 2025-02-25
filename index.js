@@ -1,3 +1,41 @@
+class Transport{
+    constructor(type, price, brand){
+this.type = type;
+this.price = price;
+this.brand = brand;
+    }
+
+    getInfo(){
+    return `Type: ${this.type}, 
+            Price: ${this.price}, 
+            Brand: ${this.brand}`;
+        }
+
+    getPrice(){
+        return `Price: ${this.price}`;
+    }
+}
+
+class Car extends Transport{
+    constructor(type, price, brand, doors){
+        super(type, price, brand);
+        this.doors= doors;
+    }
+    getDoorsCount(){
+        return `Number of doors: ${this.doors}`;
+    }
+}
+
+class Bike extends Transport{
+    constructor(type, price, brand, maxSpeed){
+        super(type, price, brand);
+        this.maxSpeed = maxSpeed;
+    }
+    getMaxSpeed(){
+        return `Maximum speed: ${this.maxSpeed}`;
+    }
+}
+
 const data = [
     {
     id: 1,
@@ -33,40 +71,17 @@ const data = [
     }
 ];
 
-class Transport{
-    constructor(type, price, brand){
-this.type = type;
-this.price = price;
-this.brand = brand;
+data.map(function (item){
+    if(item.type == 'car'){
+        const car = new Car(item.type, item.price, item.brand, item.doors);
+        console.log(car.getInfo());
+        console.log(car.getPrice());
+        console.log(car.getDoorsCount());
     }
-    getInfo(){
-        console.log (`
-            Type: ${this.type}, 
-            Price: ${this.price}, 
-            Brand: ${this.brand}`)
-        }
-
-    getPrice(){
-        console.log(this.price);
+    else if(item.type =='bike'){
+        const bike = new Bike(item.type, item.price, item.brand, item.maxSpeed);
+        console.log (bike.getInfo());
+        console.log (bike.getPrice());
+        console.log (bike.getMaxSpeed());
     }
-}
-
-class Car extends Transport{
-    constructor(type, price, brand, doorsCount){
-        super(type, price, brand);
-        this.doorsCount = doorsCount;
-    }
-    getDoorsCount(){
-        console.log(this.doorsCount);
-    }
-}
-
-class Bike extends Transport{
-    constructor(type, price, brand, maxSpeed){
-        super(type, price, brand);
-        this.maxSpeed = maxSpeed;
-    }
-    getMaxSpeed(){
-        console.log(this.maxSpeed);
-    }
-}
+    })
